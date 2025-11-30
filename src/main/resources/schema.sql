@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS usuarios (
+  id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,
+  nombre VARCHAR(255) NOT NULL,
+  correo VARCHAR(255) NOT NULL,
+  contrasena VARCHAR(255) NOT NULL,
+  creado TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  modificado TIMESTAMP,
+  ultimo_login TIMESTAMP,
+  activo BOOLEAN DEFAULT TRUE NOT NULL,
+  CONSTRAINT ux_usuarios_correo UNIQUE (correo)
+);
+
+CREATE TABLE IF NOT EXISTS telefonos (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  numero VARCHAR(255) NOT NULL,
+  codigo_ciudad VARCHAR(50) NOT NULL,
+  codigo_pais VARCHAR(50) NOT NULL,
+  usuario_id UUID,
+  CONSTRAINT fk_telefono_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);

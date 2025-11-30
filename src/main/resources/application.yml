@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: usuarios-api
+  datasource:
+    url: jdbc:h2:mem:usuariosdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:9f8e7d6c5b4a3928171605f4e3d2c1b0a9f8e7d6c5b4a3928171605f4e3d2c1b0}
+  expiration-ms: 3600000
+
+security:
+  password:
+    # Al menos 8 caracteres, una mayuscula, una minuscula, un digito.
+    regex: '^(?=.{8,}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9.\-@_/!*&#$%^(){}\[\]:]{8,}$'
+    message: 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un dígito.'
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      springframework:
+        security: DEBUG
+    com:
+      evaluacion:
+        usuarios:
+          security: DEBUG
+
+springdoc:
+  packages-to-scan: com.evaluacion.usuarios.controller
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    health:
+      show-details: when-authorized
+    prometheus:
+      enabled: true
