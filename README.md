@@ -6,7 +6,7 @@ Esta aplicación expone endpoints para crear, leer, actualizar y eliminar usuari
 
 ---
 
-# Características principales
+## Características principales
 
 - CRUD completo para `Usuario`
 - Autenticación JWT
@@ -20,7 +20,7 @@ Esta aplicación expone endpoints para crear, leer, actualizar y eliminar usuari
 
 ---
 
-# Endpoints principales
+## Endpoints principales
 
 Base: `http://localhost:8080`
 
@@ -56,7 +56,7 @@ Base: `http://localhost:8080`
 
 ---
 
-# Ejecución local
+## Ejecución local
 
 1. Compilar y ejecutar tests:
 
@@ -74,9 +74,9 @@ Base: `http://localhost:8080`
 
 Por defecto la aplicación levantará en `http://localhost:8080`.
 
-# Cómo probar
+## Cómo probar
 
-## Crear usuario
+### Crear usuario
 
 ```bash
 curl -X POST http://localhost:8080/api/usuarios \
@@ -100,7 +100,7 @@ Respuesta (ejemplo):
 }
 ```
 
-## Hacer Login
+### Hacer Login
 
 ```bash
 curl -X POST http://localhost:8080/auth/login \
@@ -113,7 +113,7 @@ Respuesta:
 { "token": "<JWT>" }
 ```
 
-## Consumir endpoint protegido
+### Consumir endpoint protegido
 
 ```bash
 curl -H "Authorization: Bearer <JWT>" http://localhost:8080/api/usuarios
@@ -121,7 +121,7 @@ curl -H "Authorization: Bearer <JWT>" http://localhost:8080/api/usuarios
 
 ---
 
-# Swagger / OpenAPI
+## Swagger / OpenAPI
 
 - UI disponible en:
   - `/swagger-ui.html`
@@ -129,7 +129,7 @@ curl -H "Authorization: Bearer <JWT>" http://localhost:8080/api/usuarios
 
 ---
 
-# Uso de Swagger UI con autenticación JWT
+## Uso de Swagger UI con autenticación JWT
 
 Si deseas probar endpoints protegidos:
 
@@ -142,14 +142,14 @@ Si deseas probar endpoints protegidos:
 
 ---
 
-# Caching
+## Caching
 
 - Se habilita cache en memoria con Caffeine para acelerar lecturas frecuentes.
 - Cachés configurados: `usuarios` (lista), `usuario-by-id`, `usuario-by-email`.
 
 ---
 
-# Monitoreo y Métricas (Actuator + Prometheus)
+## Monitoreo y Métricas (Actuator + Prometheus)
 
 - Endpoints Actuator expuestos: `/actuator/health`, `/actuator/metrics`, `/actuator/prometheus`.
 - Integración con Micrometer Prometheus.
